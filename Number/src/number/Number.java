@@ -11,11 +11,6 @@ package number;
  */
 public class Number {
 
-    public interface CalculationOperation {
-
-        Number calc(Number x, Number y);
-    }
-
     private double a;
     private double b;
 
@@ -33,10 +28,6 @@ public class Number {
 
     public void setB(double b) {
         this.b = b;
-    }
-
-    public static void main(String[] args) {
-
     }
 
 }
