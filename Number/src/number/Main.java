@@ -17,11 +17,15 @@ public class Main {
 
     public static void main(String[] args) {
         Main main = new Main();
+        ComplexCalculator cc = new ComplexCalculator();
+        RationalCalculator rc = new RationalCalculator();
+        VectorCalculator vc = new VectorCalculator();
+
         int calculator = main.chooseCalculator();
-        int operation = main.chooseOperation();
         Number[] n = main.setNumbers();
         Number x = n[0];
         Number y = n[1];
+        int operation = main.chooseOperation();
 
     }
 
