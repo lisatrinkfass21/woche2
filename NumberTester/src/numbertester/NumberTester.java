@@ -11,6 +11,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.IntStream;
 
 /**
  *
@@ -51,7 +52,7 @@ public class NumberTester {
     }
 
     public void testFile() {
-        String[] zeile = new String[2];
+        String[] zeile = new String[3];
         int zahl1 = 0;
         int zahl2 = 0;
 
@@ -61,7 +62,7 @@ public class NumberTester {
             for (int i = 0; i < anzahlZeilen; i++) {
                 zeile = br.readLine().split(" ");
                 zahl1 = Integer.parseInt(zeile[0]);
-                zahl2 = Integer.parseInt(zeile[2]);
+                zahl2 = Integer.parseInt(zeile[1]);
 
                 switch (zahl1) {
                     case 1:
@@ -82,6 +83,13 @@ public class NumberTester {
                         }
                         break;
                     case 3:
+                        setPalindromeTester((number) -> {
+                            return number == IntStream.iterate(number, e -> e / 10)
+                                    .map(n -> n % 10)
+                                    .limit(String.valueOf(number).length())
+                                    .reduce(0, (a, b) -> a = a * 10 + b);
+                        });
+
                         if (this.palindromeTester.testNumber(zahl2)) {
                             System.out.println("PALINDROME");
                         } else {
