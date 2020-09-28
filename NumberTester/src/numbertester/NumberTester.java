@@ -30,8 +30,7 @@ public class NumberTester {
 
     public static void main(String[] args) {
         NumberTester nt = new NumberTester("zahlen.txt");
-        nt.oddEvenTester
-
+        nt.testFile();
 
     }
 
@@ -66,12 +65,28 @@ public class NumberTester {
 
                 switch (zahl1) {
                     case 1:
-
+                        setOddEvenTester((n) -> n % 2 == 0);
+                        if (oddEvenTester.testNumber(zahl2)) {
+                            System.out.println("EVEN");
+                        } else {
+                            System.out.println("ODD");
+                        }
                         break;
 
                     case 2:
+                        setPrimeTester((p) -> this.isPrime(p));
+                        if (this.primeTester.testNumber(zahl2)) {
+                            System.out.println("PRIME");
+                        } else {
+                            System.out.println("NO PRIME");
+                        }
                         break;
                     case 3:
+                        if (this.palindromeTester.testNumber(zahl2)) {
+                            System.out.println("PALINDROME");
+                        } else {
+                            System.out.println(" NO PALINDROME");
+                        }
                         break;
 
                     default:
@@ -86,5 +101,17 @@ public class NumberTester {
             Logger.getLogger(NumberTester.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+
+    private boolean isPrime(int p) {
+        if (p <= 2) {
+            return (p == 2);
+        }
+        for (int i = 2; i * i <= p; i++) {
+            if (p % i == 0) {
+                return false;
+            }
+        }
+        return true;
     }
 }
