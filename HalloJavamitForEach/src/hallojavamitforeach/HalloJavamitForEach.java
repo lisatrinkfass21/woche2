@@ -7,6 +7,7 @@ package hallojavamitforeach;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 /**
  *
@@ -17,12 +18,21 @@ public class HalloJavamitForEach {
     private List<String> liste = new ArrayList<>();
 
     public static void main(String[] args) {
+
         HalloJavamitForEach he = new HalloJavamitForEach();
+        for (int i = 0; i < 10; i++) {
+            he.liste.add("A");
+
+        }
         for (int i = 0; i < he.liste.size(); i++) {
             System.out.println(he.liste.get(i));
         }
 
-        he.liste.forEach((String s) -> System.out.println());
+        he.liste.forEach((String s) -> System.out.println(s));
+
+        Consumer<String> consumer = (String s) -> System.out.println(s);
+
+        he.liste.forEach(System.out::print);
 
     }
 
