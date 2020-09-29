@@ -26,7 +26,6 @@ public class Main {
         Number y;
         int calculator;
         int operation;
-        Number erg;
         do {
             calculator = main.chooseCalculator();
             switch (calculator) {
@@ -35,27 +34,33 @@ public class Main {
                     x = n[0];
                     y = n[1];
                     operation = main.chooseOperation();
-                    erg = main.doSwitch(operation, rc, x, y);
+                    main.ausGabeErgebnis(main.doSwitch(operation, rc, x, y));
                     break;
                 case 2:
                     n = main.setNumbers();
                     x = n[0];
                     y = n[1];
                     operation = main.chooseOperation();
-                    erg = main.doSwitch(operation, vc, x, y);
+                    main.ausGabeErgebnis(main.doSwitch(operation, vc, x, y));
                     break;
                 case 3:
                     n = main.setNumbers();
                     x = n[0];
                     y = n[1];
                     operation = main.chooseOperation();
-                    erg = main.doSwitch(operation, cc, x, y);
+                    main.ausGabeErgebnis(main.doSwitch(operation, cc, x, y));
                     break;
                 default:
                     System.out.println("ungültige Zahl");
             }
         } while (calculator != 4);
 
+    }
+
+    private void ausGabeErgebnis(Number erg) {
+        System.out.println("Solution:");
+        System.out.println("a = " + erg.getA());
+        System.out.println("b = " + erg.getB());
     }
 
     private Number doSwitch(int operation, AbstractCalculator calc, Number a, Number b) {

@@ -17,22 +17,22 @@ public class ComplexCalculator extends AbstractCalculator {
 
     @Override
     public Number add(Number a, Number b) {
-
+        return this.add.calc(a, b);
     }
 
     @Override
     public Number subtract(Number a, Number b) {
-
+        return this.subtract(a, b);
     }
 
     @Override
     public Number multiply(Number a, Number b) {
-
+        return this.multiply(a, b);
     }
 
     @Override
     public Number divide(Number a, Number b) {
-
+        return this.divide(a, b);
     }
 
 }
