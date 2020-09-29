@@ -17,9 +17,37 @@ public class Main {
 
     public static void main(String[] args) {
         Main main = new Main();
-        ComplexCalculator cc = new ComplexCalculator();
-        RationalCalculator rc = new RationalCalculator();
-        VectorCalculator vc = new VectorCalculator();
+        //ComplexCalculator cc = new ComplexCalculator();
+
+        RationalCalculator rc = new RationalCalculator((Number x, Number y) -> {
+            double erg = x.getB() * y.getB();
+            Number n = new Number(x.getA() * y.getB(), erg);
+            Number n2 = new Number(y.getA() * x.getB(), erg);
+            return new Number(n.getA() + n2.getA(), erg);
+        }, (Number x, Number y) -> {
+            double erg = x.getB() * y.getB();
+            Number n = new Number(x.getA() * y.getB(), erg);
+            Number n2 = new Number(y.getA() * x.getB(), erg);
+            return new Number(n.getA() - n2.getA(), erg);
+        }, (Number x, Number y) -> {
+            return new Number(x.getA() * y.getA(), x.getB() * y.getB());
+        }, (Number x, Number y) -> {
+            return new Number(x.getA() / y.getB(), x.getB() / y.getA());
+        });
+
+        VectorCalculator vc = new VectorCalculator((Number x, Number y) -> {
+            return new Number(x.getA() + y.getA(), x.getB() + y.getB());
+        }, (Number x, Number y) -> {
+            return new Number(x.getA() - y.getA(), x.getB() - y.getB());
+        }, (Number x, Number y) -> {
+            double erg1 = x.getA() * y.getB();
+            double erg2 = x.getB() * y.getA();
+            return new Number(erg1 - erg2, 0);
+        }, (Number x, Number y) -> {
+            double erg1 = x.getA() * y.getA();
+            double erg2 = x.getB() * y.getB();
+            return new Number(erg1 + erg2, 0);
+        });
 
         Number[] n;
         Number x;
@@ -48,7 +76,7 @@ public class Main {
                     x = n[0];
                     y = n[1];
                     operation = main.chooseOperation();
-                    main.ausGabeErgebnis(main.doSwitch(operation, cc, x, y));
+                    //  main.ausGabeErgebnis(main.doSwitch(operation, cc, x, y));
                     break;
                 default:
                     System.out.println("ungültige Zahl");
