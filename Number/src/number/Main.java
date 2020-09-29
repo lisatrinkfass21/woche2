@@ -21,16 +21,68 @@ public class Main {
         RationalCalculator rc = new RationalCalculator();
         VectorCalculator vc = new VectorCalculator();
 
-        int calculator = main.chooseCalculator();
-        Number[] n = main.setNumbers();
-        Number x = n[0];
-        Number y = n[1];
-        int operation = main.chooseOperation();
+        Number[] n;
+        Number x;
+        Number y;
+        int calculator;
+        int operation;
+        Number erg;
+        do {
+            calculator = main.chooseCalculator();
+            switch (calculator) {
+                case 1:
+                    n = main.setNumbers();
+                    x = n[0];
+                    y = n[1];
+                    operation = main.chooseOperation();
+                    erg = main.doSwitch(operation, rc, x, y);
+                    break;
+                case 2:
+                    n = main.setNumbers();
+                    x = n[0];
+                    y = n[1];
+                    operation = main.chooseOperation();
+                    erg = main.doSwitch(operation, vc, x, y);
+                    break;
+                case 3:
+                    n = main.setNumbers();
+                    x = n[0];
+                    y = n[1];
+                    operation = main.chooseOperation();
+                    erg = main.doSwitch(operation, cc, x, y);
+                    break;
+                default:
+                    System.out.println("ungültige Zahl");
+            }
+        } while (calculator != 4);
 
+    }
+
+    private Number doSwitch(int operation, AbstractCalculator calc, Number a, Number b) {
+        Number erg = new Number();
+        switch (operation) {
+            case 1:
+                erg = calc.add(a, b);
+                break;
+            case 2:
+                erg = calc.subtract(a, b);
+                break;
+            case 3:
+                erg = calc.multiply(a, b);
+                break;
+            case 4:
+                erg = calc.divide(a, b);
+                break;
+
+            default:
+                System.out.println("ungültige Zahl");
+        }
+        return erg;
     }
 
     private int chooseCalculator() {
         int auswahl;
+        System.out.println("Choose Calculator:");
         System.out.println("1 - Relational calculator");
         System.out.println("2 - Vector calculator");
         System.out.println("3 - Complex calculator");
@@ -52,21 +104,21 @@ public class Main {
 
     private int chooseOperation() {
         int auswahl;
+        System.out.println("Choose Calculator:");
         System.out.println("1 - add");
         System.out.println("2 - subtraction");
         System.out.println("3 - mutliply");
         System.out.println("4 - divide");
-        System.out.println("5 - enter numbers again");
 
         auswahl = Integer.parseInt(s.nextLine());
-        while (auswahl < 1 || auswahl > 5) {
+        while (auswahl < 1 || auswahl > 4) {
             try {
                 auswahl = Integer.parseInt(s.nextLine());
             } catch (NumberFormatException e) {
                 System.out.println("Fehler - Sie haben keine Zahl eingegeben");
             }
-            if (auswahl < 1 || auswahl > 5) {
-                System.out.println("bitte geben Sie eine Zahl zwischen 1 und 5 ein");
+            if (auswahl < 1 || auswahl > 4) {
+                System.out.println("bitte geben Sie eine Zahl zwischen 1 und 4 ein");
             }
         }
         return auswahl;
