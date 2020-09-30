@@ -17,18 +17,33 @@ public class Main {
 
     public static void main(String[] args) {
         Main main = new Main();
-        //ComplexCalculator cc = new ComplexCalculator();
+        ComplexCalculator cc = new ComplexCalculator((Number x, Number y) -> {
+            return new Number(x.getA() + y.getA(), x.getB() + y.getB());
+        }, (Number x, Number y) -> {
+            return new Number(x.getA() - y.getA(), x.getB() - y.getB());
+        }, (Number x, Number y) -> {
+            Number n = new Number(x.getA() * y.getA(), x.getA() * y.getB());
+            Number n2 = new Number(x.getB() * y.getA(), x.getB() * y.getB());
+            return new Number(n.getA() + n2.getB() * (-1), n.getB() + n2.getA());
+        }, (Number x, Number y) -> {
+            Number o = new Number(x.getA() * y.getA(), x.getA() * y.getB() * (-1));
+            Number o2 = new Number(x.getB() * y.getA(), x.getB() * y.getB() * (-1));
+            Number o3 = new Number(o.getA() + o2.getB() * (-1), o.getB() + o2.getA());
+            Number u = new Number(y.getA() * y.getA(), y.getA() * y.getB() * (-1));
+            Number u2 = new Number(y.getB() * y.getA(), y.getB() * y.getB() * (-1));
+            Number u3 = new Number(u.getA() + u2.getB() * (-1), 0);
+            return new Number(o3.getA() / u3.getA(), o3.getB() / u3.getA());
+
+        });
 
         RationalCalculator rc = new RationalCalculator((Number x, Number y) -> {
-            double erg = x.getB() * y.getB();
-            Number n = new Number(x.getA() * y.getB(), erg);
-            Number n2 = new Number(y.getA() * x.getB(), erg);
-            return new Number(n.getA() + n2.getA(), erg);
+            Number e = new Number(x.getA() * y.getB(), x.getB() * y.getB());
+            Number e2 = new Number(y.getA() * x.getB(), x.getB() * y.getB());
+            return new Number(e.getA() + e2.getA(), x.getB() * y.getB());
         }, (Number x, Number y) -> {
-            double erg = x.getB() * y.getB();
-            Number n = new Number(x.getA() * y.getB(), erg);
-            Number n2 = new Number(y.getA() * x.getB(), erg);
-            return new Number(n.getA() - n2.getA(), erg);
+            Number e = new Number(x.getA() * y.getB(), x.getB() * y.getB());
+            Number e2 = new Number(y.getA() * x.getB(), x.getB() * y.getB());
+            return new Number(e.getA() - e2.getA(), x.getB() * y.getB());
         }, (Number x, Number y) -> {
             return new Number(x.getA() * y.getA(), x.getB() * y.getB());
         }, (Number x, Number y) -> {
@@ -40,13 +55,9 @@ public class Main {
         }, (Number x, Number y) -> {
             return new Number(x.getA() - y.getA(), x.getB() - y.getB());
         }, (Number x, Number y) -> {
-            double erg1 = x.getA() * y.getB();
-            double erg2 = x.getB() * y.getA();
-            return new Number(erg1 - erg2, 0);
+            return new Number((x.getA() * y.getB()) - (x.getB() * y.getA()), 0);
         }, (Number x, Number y) -> {
-            double erg1 = x.getA() * y.getA();
-            double erg2 = x.getB() * y.getB();
-            return new Number(erg1 + erg2, 0);
+            return new Number((x.getB() * y.getB()) + x.getB() * y.getB(), 0);
         });
 
         Number[] n;
@@ -76,7 +87,7 @@ public class Main {
                     x = n[0];
                     y = n[1];
                     operation = main.chooseOperation();
-                    //  main.ausGabeErgebnis(main.doSwitch(operation, cc, x, y));
+                    main.ausGabeErgebnis(main.doSwitch(operation, cc, x, y));
                     break;
                 default:
                     System.out.println("ungültige Zahl");
