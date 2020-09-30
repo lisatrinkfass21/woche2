@@ -33,7 +33,6 @@ public class Main {
             Number u2 = new Number(y.getB() * y.getA(), y.getB() * y.getB() * (-1));
             Number u3 = new Number(u.getA() + u2.getB() * (-1), 0);
             return new Number(o3.getA() / u3.getA(), o3.getB() / u3.getA());
-
         });
 
         RationalCalculator rc = new RationalCalculator((Number x, Number y) -> {
@@ -88,6 +87,9 @@ public class Main {
                     y = n[1];
                     operation = main.chooseOperation();
                     main.ausGabeErgebnis(main.doSwitch(operation, cc, x, y));
+                    break;
+                case 4:
+                    System.out.println("Programm wird beendet");
                     break;
                 default:
                     System.out.println("ungültige Zahl");
